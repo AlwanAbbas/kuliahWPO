@@ -1,0 +1,54 @@
+@layout.app({title: 'Register'})
+
+<div class="flex min-h-screen">
+  <!-- Bagian Kiri: Gambar Latar -->
+  <div class="w-1/2 bg-cover bg-center relative" style="background-image: url('/images/login-background.jpg')">
+    <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center px-12">
+      <h1 class="text-5xl font-bold text-white mb-4">Welcome Back</h1>
+      <p class="text-white max-w-md mb-6">
+        Selamat datang kembali! Masuk untuk melanjutkan ke akun Anda.
+      </p>
+      <div class="flex space-x-4">
+        <a href="#"><img src="/icons/facebook.svg" class="w-6 h-6" alt="Facebook"></a>
+        <a href="#"><img src="/icons/twitter.svg" class="w-6 h-6" alt="Twitter"></a>
+        <a href="#"><img src="/icons/instagram.svg" class="w-6 h-6" alt="Instagram"></a>
+        <a href="#"><img src="/icons/youtube.svg" class="w-6 h-6" alt="YouTube"></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bagian Kanan: Form Login -->
+  <div class="w-1/2 flex items-center justify-center px-8">
+    <form action="/login" method="POST" class="w-full max-w-md bg-white p-8 rounded shadow-md">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Sign In</h2>
+
+      {{ csrfField() }}
+
+      <div class="mb-4">
+        <label for="email" class="block text-sm font-medium mb-1">Email</label>
+        <input type="email" id="email" name="email"
+          class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+          value="{{ old('email') || '' }}" required>
+        @inputError('email')
+        <p class="text-sm text-red-600 mt-1">{{ $messages }}</p>
+        @end
+      </div>
+
+      <div class="mb-4">
+        <label for="password" class="block text-sm font-medium mb-1">Password</label>
+        <input type="password" id="password" name="password"
+          class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+          required>
+        @inputError('password')
+        <p class="text-sm text-red-600 mt-1">{{ $messages }}</p>
+        @end
+      </div>
+
+      <div class="flex items-center justify-between mb-4">
+        <label class="flex items-center text-sm">
+          <input type="checkbox" name="remember" class="mr-2">
+          Remember Me
+        </label>
+        <a href="/forgot-password" class="text-sm text-blue-600 hover:underline">Forgot Password?</a>
+      </div
+@end
