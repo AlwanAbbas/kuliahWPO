@@ -1,61 +1,70 @@
-@layout.app({title: 'Register'})
+@layout.app({title: 'Login'})
 
-<div class="flex min-h-screen">
-  <!-- Bagian Kiri: Gambar Latar -->
-  <div class="w-1/2 bg-cover bg-center relative" style="background-image: url('/images/login-background.jpg')">
-    <div class="absolute inset-0 bg-[#007ACC] bg-opacity-80 text-white flex flex-col justify-center px-12">
+<div class="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat" style="background-image: url('/icons/watasumi.jpg');">
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/10 backdrop-blur-sm z-0"></div>
+
+  <!-- Konten utama -->
+  <div class="relative z-10 flex flex-wrap w-full min-h-screen items-center justify-center px-6 md:px-12">
+    <div class="hidden lg:flex lg:flex-col lg:justify-center lg:w-1/2 text-white px-6 lg:px-12">
       <h1 class="text-5xl font-bold mb-4">Welcome Back</h1>
       <p class="max-w-md mb-6">
-        Selamat datang kembali! Masuk untuk melanjutkan ke akun Anda.
+        Selamat datang kembali! Masuk untuk melanjutkan ke akun Anda dan nikmati fitur terbaik dari kami.
       </p>
       <div class="flex space-x-4">
-        <a href="#"><img src="/icons/facebook.svg" class="w-6 h-6" alt="Facebook"></a>
-        <a href="#"><img src="/icons/twitter.svg" class="w-6 h-6" alt="Twitter"></a>
-        <a href="#"><img src="/icons/instagram.svg" class="w-6 h-6" alt="Instagram"></a>
-        <a href="#"><img src="/icons/youtube.svg" class="w-6 h-6" alt="YouTube"></a>
+        <a href="https://web.facebook.com/profile.php?id=61557957822287&locale=id_ID"><img src="/icons/facebook.svg" class="w-6 h-6" alt="Facebook" /></a>
+        <a href="#"><img src="/icons/twitter.svg" class="w-6 h-6" alt="Twitter" /></a>
+        <a href="https://www.instagram.com/sterben_xx/"><img src="/icons/instagram.svg" class="w-6 h-6" alt="Instagram" /></a>
+        <a href="#"><img src="/icons/youtube.svg" class="w-6 h-6" alt="YouTube" /></a>
       </div>
     </div>
-  </div>
 
-  <!-- Bagian Kanan: Form Login -->
-  <div class="w-1/2 flex items-center justify-center px-8">
-    <form action="/login" method="POST" class="w-full max-w-md bg-white p-8 rounded shadow-md">
-      <h2 class="text-2xl font-bold text-gray-800 mb-6">Sign In</h2>
+    <!-- Form kanan -->
+    <div class="w-full max-w-md bg-white/30 backdrop-blur-md backdrop-saturate-150 border border-white/40 p-8 rounded-xl shadow-lg z-10">
+      <h2 class="text-2xl font-bold text-white mb-6 text-center">Sign In</h2>
 
-      {{ csrfField() }}
+      <form action="/login" method="POST" class="space-y-4">
+        {{ csrfField() }}
 
-      <div class="mb-4">
-        <label for="email" class="block text-sm font-medium mb-1">Email</label>
-        <input type="email" id="email" name="email"
-          class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
-          value="{{ old('email') || '' }}" required>
-        @inputError('email')
-        <p class="text-sm text-red-600 mt-1">{{ $messages }}</p>
-        @end
-      </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-white mb-1">Email</label>
+          <input type="email" id="email" name="email"
+            class="w-full px-4 py-2 border border-red-500 rounded bg-white/30 text-black focus:ring-2 focus:ring-blue-500"
+            value="{{ old('email') || '' }}" required>
+          @inputError('email')
+          <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+          @end
+        </div>
 
-      <div class="mb-4">
-        <label for="password" class="block text-sm font-medium mb-1">Password</label>
-        <input type="password" id="password" name="password"
-          class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
-          required>
-        @inputError('password')
-        <p class="text-sm text-red-600 mt-1">{{ $messages }}</p>
-        @end
-      </div>
+        <div>
+          <label for="password" class="block text-sm font-medium text-white mb-1">Password</label>
+          <input type="password" id="password" name="password"
+            class="w-full px-4 py-2 border border-green-500 rounded bg-white/30 text-black focus:ring-2 focus:ring-blue-500"
+            required>
+          @inputError('password')
+          <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+          @end
+        </div>
 
-      <div class="flex items-center justify-between mb-4">
-        <label class="flex items-center text-sm">
-          <input type="checkbox" name="remember" class="mr-2">
-          Remember Me
-        </label>
-        <a href="/forgot-password" class="text-sm text-blue-600 hover:underline">Forgot Password?</a>
-      </div>
+        <div class="flex items-center justify-between">
+          <label class="flex items-center text-sm text-white">
+            <input type="checkbox" name="remember" class="mr-2">
+            Remember Me
+          </label>
+          <a href="/forgot-password" class="text-sm text-blue-400 hover:underline">Forgot Password?</a>
+        </div>
 
-      <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
-        Sign In
-      </button>
-    </form>
+        <button type="submit"
+          class="w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700 font-semibold transition-all">
+          Sign In
+        </button>
+
+        <p class="mt-4 text-sm text-center text-white/90">
+          Don't have an account?
+          <a href="/register" class="text-blue-500 hover:underline">Register</a>
+        </p>
+      </form>
+    </div>
   </div>
 </div>
 @end

@@ -5,17 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>{{ title }}</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+      }
+      .font-orbitron {
+        font-family: 'Orbitron', sans-serif;
+      }
+    </style>
   </head>
-  <body class="min-h-screen bg-gray-100 font-sans">
-    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white text-sm py-3 shadow-md dark:bg-neutral-800">
+  <body class="min-h-screen bg-gray-50">
+
+    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-[#007ACC]/45 backdrop-blur-sm text-sm py-3 shadow-md dark:bg-neutral-800">
       <nav class="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between">
-        <!-- Brand logo & text -->
-        <a class="flex items-center gap-2 font-semibold text-xl text-black hover:opacity-80 transition-all dark:text-white" href="/" aria-label="Brand">
+        <!-- Bagian Logo dan Brand -->
+        <a class="flex items-center gap-2 text-xl text-black hover:opacity-80 transition-all dark:text-white font-orbitron" href="/" aria-label="Brand">
           <img src="/icons/Alpha Nexus.png" alt="Alpha Nexus Logo" class="w-8 h-8 object-contain" />
           ALPHA NEXUS
         </a>
 
-        <!-- Right side (auth links or user info) -->
         <div class="flex flex-row items-center gap-5 mt-5 sm:justify-end sm:mt-0 sm:ps-5">
           @eval(await auth.check())
           @if(auth.isAutenticated)
