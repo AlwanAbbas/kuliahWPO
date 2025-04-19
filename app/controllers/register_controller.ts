@@ -10,15 +10,19 @@ export default class RegisterController {
   async store({ request, auth, session, response }: HttpContext) {
     const payload = await request.validateUsing(RegisterValidator)
 
-    const user = await User.create(payload)
+    const user = await User.create({
+      fullName: payload.full_name,
+      username: payload.username,
+      email: payload.email,
+      password: payload.password,
+    })
 
     await auth.use('web').login(user)
 
     session.flash({
       notification: {
         type: 'success',
-
-        message: 'Registrasi sukses bung!',
+        message: 'Registrasi sukses Ngab!',
       },
     })
 
