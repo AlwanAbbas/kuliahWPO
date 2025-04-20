@@ -7,23 +7,24 @@
 | The routes file is used for defining the HTTP routes.
 |
 */
+import router from '@adonisjs/core/services/router'
 import AuthController from '#controllers/auth_controller'
 import RegisterController from '#controllers/register_controller'
-
-import router from '@adonisjs/core/services/router'
+import NotesController from '#controllers/notes_controller'
 import User from '#models/user'
 import crypto from 'node:crypto'
 
+// Halaman utama
 router.on('/').render('pages/home')
 
-// Auth & Register routes
+// ======= AUTH & REGISTER =======
 router.get('register', [RegisterController, 'create'])
 router.post('register', [RegisterController, 'store'])
 router.get('login', [AuthController, 'create'])
 router.post('login', [AuthController, 'store'])
 router.delete('logout', [AuthController, 'destroy'])
 
-// Social login
+// ======= SOCIAL LOGIN =======
 router.get('/auth/:provider', async ({ ally, params }) => {
   return ally.use(params.provider).redirect()
 })
@@ -36,7 +37,6 @@ router.get('/auth/:provider/callback', async ({ ally, params, auth, response }) 
   }
 
   const user = await provider.user()
-
   const existingUser = await User.findBy('email', user.email)
   let finalUser = existingUser
 
@@ -53,9 +53,9 @@ router.get('/auth/:provider/callback', async ({ ally, params, auth, response }) 
   return response.redirect('/dashboard')
 })
 
-router
-  .get('/dashboard', async ({ view, auth }) => {
-    const userName = auth.user?.fullName
-    return view.render('dashboard', { userName })
-  })
-  .as('dashboard')
+// ======= NOTES =======
+// Menampilkan dashboard berisi semua catatan
+router.get('/dashboard', [NotesController, 'index']).as('dashboard')
+
+// Menyimpan catatan baru (POST dari form)
+router.post('/notes/create', [NotesController, 'store'])

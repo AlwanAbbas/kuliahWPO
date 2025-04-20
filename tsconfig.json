@@ -3,12 +3,15 @@
   "compilerOptions": {
     "rootDir": "./",
     "outDir": "./build",
-    "baseUrl": ".",                          // ← WAJIB
+    "baseUrl": ".",
     "paths": {
       "#models/*": ["app/models/*"],
       "#controllers/*": ["app/controllers/*"],
       "#middleware/*": ["app/middleware/*"],
-      "#start/*": ["start/*"]
+      "#start/*": ["start/*"],
+      "@ioc:Adonis/*": ["./node_modules/@adonisjs/*/build"],
+      "@ioc:Adonis/Core/*": ["node_modules/@adonisjs/core/build/src/*"],
+      "@ioc:Adonis/Lucid/*": ["node_modules/@adonisjs/lucid/build/src/*"]
     }
   }
 }
