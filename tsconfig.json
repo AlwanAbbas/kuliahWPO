@@ -2,6 +2,13 @@
   "extends": "@adonisjs/tsconfig/tsconfig.app.json",
   "compilerOptions": {
     "rootDir": "./",
-    "outDir": "./build"
+    "outDir": "./build",
+    "baseUrl": ".",                          // ← WAJIB
+    "paths": {
+      "#models/*": ["app/models/*"],
+      "#controllers/*": ["app/controllers/*"],
+      "#middleware/*": ["app/middleware/*"],
+      "#start/*": ["start/*"]
+    }
   }
 }

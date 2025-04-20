@@ -10,6 +10,7 @@
 
 import router from '@adonisjs/core/services/router'
 import server from '@adonisjs/core/services/server'
+import AuthMiddleware from '#middleware/auth_middleware'
 
 /**
  * The error handler is used to convert an exception
@@ -47,3 +48,7 @@ export const middleware = router.named({
   guest: () => import('#middleware/guest_middleware'),
   auth: () => import('#middleware/auth_middleware'),
 })
+
+export const named = {
+  auth: () => new AuthMiddleware().handle,
+}

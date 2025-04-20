@@ -10,6 +10,8 @@ export default class AuthController {
     try {
       const user = await User.verifyCredentials(request.input('email'), request.input('password'))
 
+      console.log('User logged in:', user.username)
+
       await auth.use('web').login(user)
 
       session.flash({
@@ -19,7 +21,8 @@ export default class AuthController {
         },
       })
 
-      return response.redirect('/')
+      // Setelah login sukses, redirect ke dashboard dan kirim nama user
+      return response.redirect().toRoute('dashboard', { userName: user.fullName })
     } catch (error) {
       session.flash({
         notification: {

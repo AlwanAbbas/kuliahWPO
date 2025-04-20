@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <title>{{ title }}</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icon CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+      }
+      .font-orbitron {
+        font-family: 'Orbitron', sans-serif;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-gray-50">
+
+    <!-- Navbar -->
+    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-[#007ACC]/45 backdrop-blur-sm text-sm py-3 shadow-md dark:bg-neutral-800">
+      <nav class="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between">
+        <!-- Logo -->
+        <a class="flex items-center gap-2 text-xl text-black hover:opacity-80 transition-all dark:text-white font-orbitron" href="/" aria-label="Brand">
+          <img src="/icons/Alpha Nexus.png" alt="Alpha Nexus Logo" class="w-8 h-8 object-contain" />
+          ALPHA NEXUS
+        </a>
+
+        <!-- Menu -->
+        <div class="flex flex-wrap items-center gap-5 mt-5 sm:mt-0 sm:ps-5">
+          <a href="/" class="flex items-center gap-1 text-gray-700 font-medium hover:text-blue-700 transition">
+            <i data-lucide="home" class="w-5 h-5"></i> Home
+          </a>
+          <a href="/items" class="flex items-center gap-1 text-gray-700 font-medium hover:text-blue-700 transition">
+            <i data-lucide="folder" class="w-5 h-5"></i> Data
+          </a>
+
+          @eval(await auth.check())
+          @if(auth.isAuthenticated)
+            <span class="flex items-center gap-1 text-gray-800 dark:text-white">
+              <i data-lucide="user" class="w-5 h-5"></i> {{ auth.user.name }}
+            </span>
+            <form action="/logout?_method=DELETE" method="post" class="flex items-center">
+              {{ csrfField() }}
+              <button class="flex items-center gap-1 text-red-500 font-medium hover:text-red-700 transition">
+                <i data-lucide="log-out" class="w-5 h-5"></i> Logout
+              </button>
+            </form>
+          @else
+            <a href="/login" class="flex items-center gap-1 text-gray-600 font-medium hover:text-blue-600 transition">
+              <i data-lucide="log-in" class="w-5 h-5"></i> Login
+            </a>
+            <a href="/register" class="flex items-center gap-1 text-gray-600 font-medium hover:text-blue-600 transition">
+              <i data-lucide="user-plus" class="w-5 h-5"></i> Register
+            </a>
+          @end
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-[85rem] w-full mx-auto px-4 py-8">
+      {{{ await $slots.main() }}}
+    </main>
+
+    <!-- Init Lucide -->
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
