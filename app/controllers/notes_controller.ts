@@ -26,7 +26,7 @@ export default class NotesController {
     // Menangani file gambar
     const image = request.file('image', {
       extnames: ['jpg', 'png', 'jpeg'],
-      size: '2mb',
+      size: '50mb',
     })
 
     let imagePath = ''
@@ -37,7 +37,7 @@ export default class NotesController {
       }
 
       // Menyimpan file gambar ke folder public/uploads
-      await image.move(app.publicPath('uploads'), {
+      await image.move(app.publicPath('/uploads'), {
         name: `${new Date().getTime()}.${image.extname}`,
         overwrite: true,
       })
