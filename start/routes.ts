@@ -13,7 +13,6 @@ import RegisterController from '#controllers/register_controller'
 import router from '@adonisjs/core/services/router'
 import User from '#models/user'
 import crypto from 'node:crypto'
-import { named } from '#start/kernel'
 
 router.on('/').render('pages/home')
 
@@ -22,7 +21,7 @@ router.get('register', [RegisterController, 'create'])
 router.post('register', [RegisterController, 'store'])
 router.get('login', [AuthController, 'create'])
 router.post('login', [AuthController, 'store'])
-router.delete('/', [AuthController, 'destroy'])
+router.delete('logout', [AuthController, 'destroy'])
 
 // Social login
 router.get('/auth/:provider', async ({ ally, params }) => {
@@ -56,9 +55,7 @@ router.get('/auth/:provider/callback', async ({ ally, params, auth, response }) 
 
 router
   .get('/dashboard', async ({ view, auth }) => {
-    // Mendapatkan nama pengguna dari auth
     const userName = auth.user?.fullName
     return view.render('dashboard', { userName })
   })
-  .use(named.auth())
   .as('dashboard')

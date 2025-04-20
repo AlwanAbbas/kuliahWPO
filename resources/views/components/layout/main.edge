@@ -46,7 +46,7 @@
             <span class="flex items-center gap-1 text-gray-800 dark:text-white">
               <i data-lucide="user" class="w-5 h-5"></i> {{ auth.user?.username }}
             </span>
-            <form action="/logout?_method=DELETE" method="post" class="flex items-center">
+            <form action="/logout?_method=DELETE" method="POST" class="flex items-center">
               {{ csrfField() }}
               <button class="flex items-center gap-1 text-red-500 font-medium hover:text-red-700 transition">
                 <i data-lucide="log-out" class="w-5 h-5"></i> Logout
