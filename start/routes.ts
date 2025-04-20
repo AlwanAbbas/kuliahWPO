@@ -61,3 +61,4 @@ router
     return view.render('dashboard', { userName })
   })
   .use(named.auth())
+  .as('dashboard')

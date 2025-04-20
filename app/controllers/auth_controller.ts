@@ -22,7 +22,7 @@ export default class AuthController {
       })
 
       // Setelah login sukses, redirect ke dashboard dan kirim nama user
-      return response.redirect().toRoute('dashboard', { userName: user.fullName })
+      return response.redirect().toRoute('/dashboard', { userName: user.fullName })
     } catch (error) {
       session.flash({
         notification: {

@@ -44,7 +44,7 @@
           @eval(await auth.check())
           @if(auth.isAuthenticated)
             <span class="flex items-center gap-1 text-gray-800 dark:text-white">
-              <i data-lucide="user" class="w-5 h-5"></i> {{ auth.user.name }}
+              <i data-lucide="user" class="w-5 h-5"></i> {{ auth.user?.username }}
             </span>
             <form action="/logout?_method=DELETE" method="post" class="flex items-center">
               {{ csrfField() }}
